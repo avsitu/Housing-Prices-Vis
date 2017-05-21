@@ -14,8 +14,8 @@
 .foreground path {
   fill: none;
   /*stroke: steelblue;*/
-  stroke-opacity: .7;
-  stroke-width: 1.5;
+  /*stroke-opacity: .7;*/
+  stroke-width: 5;
 }
 
 .axis text {
@@ -38,13 +38,14 @@
 </head>
 
 <body>
-	<div id="chart"></div>
-	<!-- <div id="dataset-picker"></div> -->
+	<h2>ECS 163 Project 2</h3>
+	<h3>Visualizing House Prices</h2> 
+	<p><a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques">Data Source</a></p>
+	<svg class="chart"></svg>
 	<svg class="pc"></svg>
-	<!-- <button class = 'button' type="button">Click Me!</button> -->
-	<!-- <svg class="test"></svg> -->
+	<svg class='hist'></svg>
 	<script src="js/d3.min.js"></script>
-	<script src="js/hmap.js"></script>
 	<script src="js/pc.js"></script>
-	<!-- <script src="js/test.js"></script> -->
+	<script src="js/hist.js"></script>
+	<script src="js/hmap.js"></script>
 </body>
