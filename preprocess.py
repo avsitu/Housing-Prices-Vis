@@ -101,16 +101,15 @@ def ImportTable():
 
 # ImportTable()
 
-sold = [2006,2007,2008,2009,2010]
-built_bin = [[1900,1909],[1910,1919],[1920,1929],[1930,1939],[1940,1949],[1950,1959],[1960,1969],[1970,1979],
-			[1980,1989],[1990,1999],[2000,2009]]
+years = [2006,2007,2008,2009,2010]
+months = [x for x in range(1,13)]
 
 f = csv.writer(open('data/heatmap.csv', 'w'), lineterminator='\n')
-f.writerow(['YearSold','YearBuilt(bin)','Count'])
+f.writerow(['YearSold','MonthSold','Count'])
 
-for s in sold:
-	for b in built_bin:
-		query = 'SELECT COUNT(*) FROM housing WHERE "YrSold"=%s AND "YearBuilt">=%s AND "YearBuilt"<=%s' %(s,b[0],b[1])
+for y in years:
+	for m in months:
+		query = 'SELECT COUNT(*) FROM housing WHERE "YrSold"=%s AND "MoSold"=%s' %(y,m)
 		cursor.execute(query)
 		# print '%s, %s: %s' %(s, str(b), cursor.fetchone()[0])		 
-		f.writerow([s,str(b[0])+'-'+str(b[1]),cursor.fetchone()[0]])
+		f.writerow([y,m,cursor.fetchone()[0]])
