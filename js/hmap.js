@@ -93,7 +93,7 @@ function heatmapChart(tsvFile) {
               if(hist.hasOwnProperty(price_scale(selection[i].price))) hist[price_scale(selection[i].price)]++;
               else hist[price_scale(selection[i].price)]=1;
             }
-            console.log(hist);
+            // console.log(hist);
             pc(selection);
             histo(hist);
             hist = {};

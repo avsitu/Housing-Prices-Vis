@@ -21,6 +21,8 @@ var first = true;
 function pc(data) {
 	// d3.csv(fn, myfilter, function(data) { 
 	// 	var axis = d3.axisLeft();
+	br_min = d3.min(data, function(p) { return p['bedrooms']; });
+		br_max = d3.max(data, function(p) { return p['bedrooms']; });
 
 	// Extract the list of dimensions and create a scale for each.
 	x2.domain(dimensions = d3.keys(data[0]).filter(function(d) {
@@ -42,7 +44,7 @@ function pc(data) {
 	  update.exit().transition().duration(1000)
       .style("opacity", 0).remove();
 	  
-	  update.enter().append("path").attr("class", "enter").attr('fill','none').attr('stroke-width',1.5)
+	  update.enter().append("path").merge(update).attr("class", "enter").attr('fill','none').attr('stroke-width',1.5)
 		.attr("d", path).attr('stroke', function(d) {return price_color(d.price)}).style('opacity',0)
 		.transition().duration(1000)
       .style("opacity", 1);
@@ -53,17 +55,31 @@ function pc(data) {
 	 		svg2.append('g').attr('class', "axis"+d)
 	 		.attr("transform", function() {
     	return "translate(" + x2(dimensions[d]) + ")"; });
-
-			d3.select('.axis'+d).call(d3.axisRight(y2[dimensions[d]]))
-			.append("svg:text")
-		  .attr("y", -9).attr('fill','black')
-	  	.text(labels[d]);
+	 		if (labels[d] == 'Bedrooms') {
+	 			// console.log(br_min+' '+br_max);
+				d3.select('.axis'+d).call(d3.axisRight(y2[dimensions[d]]))
+				.append("svg:text")
+			  .attr("y", -9).attr('fill','black')
+		  	.text(labels[d]);
+	 		}
+	 		else { 			
+				d3.select('.axis'+d).call(d3.axisRight(y2[dimensions[d]]))
+				.append("svg:text")
+			  .attr("y", -9).attr('fill','black')
+		  	.text(labels[d]);
+	 		}
  		}
 	 	first = false;
  	}
  	else {
- 		for(var d=0; d < dimensions.length; d++)
-			d3.select('.axis'+d).transition().duration(1000).call(d3.axisRight(y2[dimensions[d]]));
+ 		for(var d=0; d < dimensions.length; d++) {
+ 			if(labels[d] == 'Bedrooms') {
+ 				// console.log(br_min+' '+br_max);
+ 				d3.select('.axis'+d).transition().duration(1000).call(d3.axisRight(y2[dimensions[d]]));
+ 			}
+			else
+				d3.select('.axis'+d).transition().duration(1000).call(d3.axisRight(y2[dimensions[d]]));
+ 		}
  	}
 };	
 
