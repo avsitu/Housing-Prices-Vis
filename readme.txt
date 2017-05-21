@@ -1,0 +1,3 @@
+The dataset I chose is from Kaggle https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data. The dataset contains various attributes about houses sold between 2006 and 2010, and it's intended to be used for predicting the sales price of each house. 
+Currently I have a heatmap of the number of houses sold in each year broken down by the year the houses were built. The user can also mouseover each tile to see the exact count. 
+The next step would be to add interactive features such as allowing the user to click on each year to bring up charts that visualize certain attributes of houses sold in that year. 
