@@ -155,9 +155,9 @@ heatmapChart(datasets[0]);
 
 function myfilter2(d) {
   return {
-    bedrooms: +d.BedroomAbvGr,
     lot_area: +d.LotArea,
-    quality: +d.OverallQual,
+    liv_area: +d.GrLivArea,
+    bedrooms: +d.BedroomAbvGr,
     built: +d.YearBuilt,
     price: +d.SalePrice,
     yr_sold: +d.YrSold,

@@ -51,7 +51,7 @@ function pc(data) {
 		.transition().duration(1000)
       .style("opacity", 1);
 
- 	labels = ['Bedrooms','Lot Area', 'Overall Quality', 'Year Built', 'Sale Price'];
+ 	labels = ['Lot Area (sq. feet)', 'Living Area(sq. feet)', 'Bedrooms', 'Year Built', 'Sale Price'];
  	if(first) {
  		for(var d=0; d < dimensions.length; d++) {
 	 		svg2.append('g').attr('class', "axis"+d)
