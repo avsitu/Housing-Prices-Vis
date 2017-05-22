@@ -1,6 +1,6 @@
-var m = [50, 40, 50, 40],
-  w = 1200 - m[1] - m[3],
-  h = 500 - m[0] - m[2];
+var m = [100, 40, 50, 300],
+  w = 1500 - m[1] - m[3],
+  h = 600 - m[0] - m[2];
 var line = d3.line();
 var dragging = {};
 var x2 = d3.scaleBand().range([0, w]);
@@ -9,13 +9,15 @@ var y2 = {};
 var svg2 = d3.select('.pc')
   .attr("width", w + m[1] + m[3])
   .attr("height", h + m[0] + m[2]).append("g")
-  .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+  .attr("transform", "translate(" + 20 + "," + 50 + ")");
 
 var background;
 var foreground = svg2.append('g')
   .attr('width', w)
   .attr('height', h);;
 
+var legend2 = d3.select('.pc').append('g').attr('class', 'legend2').attr('transform', 'translate(1050,-430)'); 
+var colors2 = ["#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"];
 var first = true;
 
 function pc(data) {
@@ -34,9 +36,9 @@ function pc(data) {
 		  } 	
 		}
 	));
-	price_color = d3.scaleQuantize()
+	price_color = d3.scaleQuantile()
 	.domain([d3.min(data, function(d) { return d.price; }),d3.max(data, function(d) { return d.price; })])
-	.range(["#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]);
+	.range(colors2);
 
 	update = foreground.selectAll("path")
 	  .data(data);	
@@ -81,6 +83,29 @@ function pc(data) {
 				d3.select('.axis'+d).transition().duration(1000).call(d3.axisRight(y2[dimensions[d]]));
  		}
  	}
+
+ 	update2 = legend2.selectAll("text")
+        .data([0].concat(price_color.quantiles()), function(d) { return d; });
+	update2.exit().remove();
+  update2.enter().append("text").merge(update2)
+      .attr("x", function(d, i) { return 70 * i + 5; })
+      .attr("y", h + 85)  
+      .text(function(d) { 
+      	val = Math.round(d).toString();
+      	if(val.length>=6) val = val.slice(0,3)+'k';
+      	else if(val.length==5) val = val.slice(0,2)+'k';
+      	return " >= $" + val; });
+ 	update3 = legend2.selectAll("rect")
+        .data([0].concat(price_color.quantiles()), function(d) { return d; });        
+	update3.exit().remove();
+	update3.enter().append("rect").merge(update3)
+	      .attr("x", function(d, i) { return 70 * i; })
+	      .attr("y", h + 40)
+	      .attr("width", 70)
+	      .attr("height", 30)
+	      .style("fill", function(d, i) { return colors2[i]; });   
+	// legend2.append('g').append('text').text('Sales Price:').attr('x',-20).attr('transform','translate(-60,510)');
+       
 };	
 
 function position(d) {

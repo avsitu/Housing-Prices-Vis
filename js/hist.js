@@ -4,11 +4,15 @@ var m3 = [50, 40, 50, 40],
 
 var x3 = d3.scaleBand().range([0, w3]).padding(0.1);
 var y3 = d3.scaleLinear().range([h3, 0]);
-
-var svg3 = d3.select('.hist')
+var a = w3 + m3[1] + m3[3], b=h3 + m3[0] + m3[2];
+var svg3 = d3.select('.chart').attr('width',1500).attr('height',560)
+	.append('svg')
   .attr("width", w3 + m3[1] + m3[3])
-  .attr("height", h3 + m3[0] + m3[2])
-  .attr("transform", "translate(" + 1050 + "," + -900 + ")");
+  .attr("height", h3 + m3[0] + m3[2]).attr('transform','translate(1050,60)')
+  // .attr("transform", "translate(" + 1050 + "," + -1000 + ")");
+  // .append('svg')
+  // .attr("width", w3 + m3[1] + m3[3])
+  // .attr("height", h3 + m3[0] + m3[2]).attr('x',0).attr('y',0).attr('viewbox', '0 0 '+a+' '+b).append('g')
 
 
 var chart = svg3.append('g')
@@ -25,7 +29,7 @@ function histo(hist) {
 		data2.push(elt);
 	}
 
-	x3.domain(['100k','200k','300k','400k','500k','600k','700k','800k']);
+	x3.domain(['>=0','>=100k','>=200k','>=300k','>=400k','>=500k','>=600k','>=700k']);
 	y3.domain([0,d3.max(data2.map(function(d) {return d.y}))]);
 	// console.log(d3.max(data.map(function(d) {return d.y})));
 	// console.log(d3.keys(data));

@@ -11,14 +11,16 @@ var margin = { top: 50, right: 0, bottom: 100, left: 110 },
           datasets = ["data/data.tsv", "data/data2.tsv"];
 
 var svg = d3.select(".chart")
-    .attr("width", width + margin.left + margin.right + 50)
-    .attr("height", height + margin.top + margin.bottom)
-    .attr("transform", "translate(" + 0 + "," + 0 + ")");;
-// svg.append("rect")
-//     .attr("width", "100%")
-//     .attr("height", "100%")
-//     .attr("fill", '#4a4b4f');    
-    
+    .append('svg')
+    .attr("transform", "translate(" + 0 + "," + 40 + ")");;
+    // .attr("width", width + margin.left + margin.right + 50)
+    // .attr("height", height + margin.top + margin.bottom)
+
+
+d3.select('.chart').append('g').attr('transform','translate(380,30)')
+.append('text').text('Sales Count By Month of Year (click on tiles for details)').attr('font-size',20);
+
+d3.select('.divider').attr('width',1500).attr('height',1.5).append('rect').attr('width','100%').attr('height','100%').attr('fill','grey');
 svg = svg.append("g")
 .attr('width', width)
   .attr('height', height) 
@@ -26,7 +28,7 @@ svg = svg.append("g")
 
 svg.append('text').text('Sale Month').attr('x', width/2).attr('y', -30);
 svg.append('text').text('Sale Year').attr('x', -100).attr('y', height/2);
-price_scale = d3.scaleQuantize().domain([0,800000]).range(['100k','200k','300k','400k','500k','600k','700k','800k']);
+price_scale = d3.scaleQuantize().domain([0,800000]).range(['>=0','>=100k','>=200k','>=300k','>=400k','>=500k','>=600k','>=700k']);
 hist = {};
 
 var dayLabels = svg.selectAll(".dayLabel")
