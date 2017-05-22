@@ -89,7 +89,7 @@ function pc(data) {
 	update2.exit().remove();
   update2.enter().append("text").merge(update2)
       .attr("x", function(d, i) { return 70 * i + 5; })
-      .attr("y", h + 85)  
+      .attr("y", h + 65)  
       .text(function(d) { 
       	val = Math.round(d).toString();
       	if(val.length>=6) val = val.slice(0,3)+'k';
@@ -100,7 +100,7 @@ function pc(data) {
 	update3.exit().remove();
 	update3.enter().append("rect").merge(update3)
 	      .attr("x", function(d, i) { return 70 * i; })
-	      .attr("y", h + 40)
+	      .attr("y", h + 20)
 	      .attr("width", 70)
 	      .attr("height", 30)
 	      .style("fill", function(d, i) { return colors2[i]; });   
